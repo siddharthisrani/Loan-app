@@ -8,11 +8,11 @@ import loanRouter from "./routes/loanRouter.js";
 const app = express();
 app.use(cors());
 dotenv.config();
-const PORT = 5000;
+const Port = process.env.PORT || 5000;
 
 app.use(express.json());
 
-const CONNECTION_URL = 'mongodb://localhost:27017/loanapp';
+const CONNECTION_URL = process.env.MONGODB_URI || "mongodb://localhost:27017/loanapp"
 
 // Connect to MongoDB
 mongoose
@@ -24,6 +24,6 @@ mongoose
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/loans", loanRouter);
 
-app.listen(PORT, () => {
-  console.log(`App is listening to port ${PORT}`);
+app.listen(Port, () => {
+  console.log(`App is listening to port ${Port}`);
 });
